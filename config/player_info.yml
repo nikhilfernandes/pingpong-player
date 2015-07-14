@@ -1,6 +1,6 @@
 player:
   name: Joey
-  email: joey@g.com
+  identity: joey@g.com
   password: password
   defence_set_length: 8
   host: http://localhost

@@ -13,7 +13,9 @@ class GamesController < ApplicationController
 
   def play
     game = @current_player.games.find(params[:id])
-    HttpRequest.post("http://localhost",3000, "/championships/#{game.championship_id}/games/#{game.identity}/rounds",{round: game.play},@current_player.auth_token)    
+    player_info = PlayerInfo.new(PLAYER_INFO["player"])
+    params = {round: {turn: player_info.identity}.merge!(game.play)}
+    HttpRequest.post("http://localhost",3000, "/championships/#{game.championship_id}/games/#{game.identity}/rounds", params, @current_player.auth_token)    
     render json: {message: "Player has played."}, status: :ok
   end
 

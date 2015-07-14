@@ -12,9 +12,9 @@ class Game < ActiveRecord::Base
   def play
     player_info = PlayerInfo.new(PLAYER_INFO["player"])
     if self.role == ROLE::OFFENSE
-      Random.rand(10)
+      {number: Random.rand(10)}
     elsif self.role == ROLE::DEFENSE
-      (1..10).to_a.sample player_info.defence_set_length
+      {defensive_array: (1..10).to_a.sample player_info.defence_set_length}
     end
     
   end
