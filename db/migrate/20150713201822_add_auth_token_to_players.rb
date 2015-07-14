@@ -1,5 +1,8 @@
 class AddAuthTokenToPlayers < ActiveRecord::Migration
   def change
-    add_column :players, :auth_token, :string
+    create_table(:players) do |t|
+      t.string :auth_token
+    end
+    
   end
 end

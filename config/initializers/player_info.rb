@@ -1,0 +1,1 @@
+PLAYER_INFO = YAML.load_file(File.join(Rails.root, "/config/player_info.yml"))
