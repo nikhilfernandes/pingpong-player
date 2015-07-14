@@ -11,7 +11,7 @@
         success: function(data){
           
         },error: function(data) {
-          alert(data.responseJSON.errors)
+          alert(data.responseJSON.errors.identity)
         },
         dataType: "json"
       });   
@@ -29,7 +29,7 @@
     <div class="col-sm-12" style="margin-bottom:10px">
       <div class="pull-left col-sm-4"> <%= data["title"]%></div>
       <div class="pull-left col-sm-4"> <%= data["status"]%></div>
-      <% if data["status"] != "open" %>
+      <% if data["status"] == "open" %>
         <button class="pull-left col-sm-2 btn btn-success join-championship"  data-championship="<%= data['id']%>">Join</button>
       <% end %>
     </div>

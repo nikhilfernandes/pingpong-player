@@ -3,7 +3,7 @@ player:
   identity: joey@g.com
   password: password
   defence_set_length: 8
-  host: http://localhost
+  host: http://127.0.0.1
   path: /games
   port: 4000
 
