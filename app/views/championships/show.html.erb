@@ -3,5 +3,9 @@
     <h2 style="text-align:center">You were not a part  of this championship</h2>
   <% else %>
     <h2 style="text-align:center"><%= @championship.title%></h2>
+    <div class="col-sm-10">
+      <div>Status: <%= @championship.status%></div>
+      <div>Number of Player Joined: <%= @championship.num_players_joined%></div>
+    </div>
   <% end %>
 </div>
