@@ -1,3 +1,27 @@
+
+<script type="text/javascript">
+  $(function() {
+    $(".join-championship").on("click", function(e){
+        console.log("skdlksldksl")
+        var championshipId = $(e.target).data("championship")
+        $.ajax({
+        url: "http://127.0.0.1:3000/championships/"+championshipId+"/players.json",
+        type: "POST",
+        data: {player: {identity: "<%= @player_info.identity %>", name: "<%= @player_info.name %>", defence_length: <%=@player_info.defence_set_length %>, host: "<%= @player_info.host %>", port: "<%= @player_info.port %>", path: "<%=@player_info.path %>"}},
+        success: function(data){
+          
+        },error: function(data) {
+          alert(data.responseJSON.errors)
+        },
+        dataType: "json"
+      });   
+              
+    
+    });
+    
+  });
+</script>
+
 <h1>Championships</h1>
 
 <div class="col-sm-6">
@@ -5,8 +29,8 @@
     <div class="col-sm-12" style="margin-bottom:10px">
       <div class="pull-left col-sm-4"> <%= data["title"]%></div>
       <div class="pull-left col-sm-4"> <%= data["status"]%></div>
-      <% if data["status"] == "open" %>
-        <button class="pull-left col-sm-2 btn btn-success" class="join-championship" data-championship="<%= data['id']%>">Join</button>
+      <% if data["status"] != "open" %>
+        <button class="pull-left col-sm-2 btn btn-success join-championship"  data-championship="<%= data['id']%>">Join</button>
       <% end %>
     </div>
   <%end%>

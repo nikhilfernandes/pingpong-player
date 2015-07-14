@@ -1,7 +1,7 @@
 class PlayerInfo
   include ActiveModel::Conversion
   extend ActiveModel::Naming
-  attr_accessor :name, :email, :password, :host, :port, :path, :defence_set_length
+  attr_accessor :name, :identity, :password, :host, :port, :path, :defence_set_length
 
   def initialize(attributes={})        
     attributes.each do |name, value|

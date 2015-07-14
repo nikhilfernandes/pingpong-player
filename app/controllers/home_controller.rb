@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     @data = URI.parse("http://127.0.0.1:3000/championships").read    
     @championships = JSON.parse(@data)
     puts @championships
+    @player_info = PlayerInfo.new(PLAYER_INFO["player"])
     
   end
 
