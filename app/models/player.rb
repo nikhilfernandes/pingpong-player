@@ -3,5 +3,7 @@ class Player < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   
   has_many :games
+
+  belongs_to :championship
   
 end

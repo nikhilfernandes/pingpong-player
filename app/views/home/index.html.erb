@@ -8,9 +8,8 @@
         type: "POST",
         data: {championshipId: championshipId},
         success: function(data){
-          
-        },error: function(data) {
-          console.log(data)
+          window.location.href = "/championships/"+data.championshipId;
+        },error: function(data) {          
           alert(data.responseJSON.errors)
         },
         dataType: "json"
@@ -30,7 +29,8 @@
     <tr>
       <th> Title </th>
       <th> Status </th>
-      <th>  Action</th>            
+      <th> Action</th>            
+      <th> View</th>            
     </tr>
   </thead>
   <tbody>
@@ -43,6 +43,7 @@
         <%else%>
           <td></td>
         <% end %>
+        <td><a href="/championships/<%= data['id']%>">View</a></td>
       </tr>
     <% end %>
   </tbody>
