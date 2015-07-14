@@ -12,7 +12,9 @@ class GamesController < ApplicationController
   end
 
   def play
-    render json: {result: @current_player.games.find(params[:id]).play}
+    game = @current_player.games.find(params[:id])
+    HttpRequest.post("http://localhost",3000, "/championships/#{game.championship_id}/games/#{game.identity}/rounds",{round: game.play},@current_player.auth_token)    
+    render json: {message: "Player has played."}, status: :ok
   end
 
   def validate_player!        
