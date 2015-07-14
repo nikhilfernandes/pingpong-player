@@ -22,16 +22,32 @@
   });
 </script>
 
-<h1>Championships</h1>
+<h1 style="text-align:center">Championships</h1>
 
-<div class="col-sm-6">
-  <% @championships.each do |data| %>
-    <div class="col-sm-12" style="margin-bottom:10px">
-      <div class="pull-left col-sm-4"> <%= data["title"]%></div>
-      <div class="pull-left col-sm-4"> <%= data["status"]%></div>
-      <% if data["status"] == "open" %>
-        <button class="pull-left col-sm-2 btn btn-success join-championship"  data-championship="<%= data['id']%>">Join</button>
-      <% end %>
-    </div>
-  <%end%>
+<div class="col-sm-6" style="margin:auto;float:none">
+  <table id="championships" class="table table-striped">
+  <thead>
+    <tr>
+      <th> Title </th>
+      <th> Status </th>
+      <th>  Action</th>            
+    </tr>
+  </thead>
+  <tbody>
+    <% @championships.each do |data| %>
+      <tr>
+        <td><%= data["title"]%></td>
+        <td><%= data["status"]%></td>
+        <% if data["status"] == "open" %>
+          <td><button class="pull-left col-sm-5 btn btn-success join-championship"  data-championship="<%= data['id']%>">Join</button></td>
+        <%else%>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+  
+</table>
+  
+    
 </div>
