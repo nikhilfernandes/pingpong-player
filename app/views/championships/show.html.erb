@@ -1,11 +1,40 @@
-<div class="col-sm-12" style="margin-top:50px;">
-  <% if @championship.nil? %>
-    <h2 style="text-align:center">You were not a part  of this championship</h2>
-  <% else %>
-    <h2 style="text-align:center"><%= @championship.title%></h2>
-    <div class="col-sm-10">
-      <div>Status: <%= @championship.status%></div>
-      <div>Number of Player Joined: <%= @championship.num_players_joined%></div>
-    </div>
-  <% end %>
+<script type="text/javascript">  
+  $(function() {
+    var id = "<%= params[:id] %>"
+    var championship = new PingPong.Models.Championship();       
+    championship.set("id", id);
+    var championship_detail = new PingPong.Views.Championship({model: championship});
+    championship.fetch({success: function(model, response, option){
+      $("#championship-detail").html(championship_detail.render().el);
+    }});
+  });
+</script>
+
+<div class="col-sm-12" id="championship-detail">
+
 </div>
+<script type="javascript/template" id="championship-template">
+    <h1 style="text-align:center">{{title}}</h1>
+    <div class="col-sm-6 well">
+      <div>Status: {{status}}</div>
+      <div>Number of Player Joined: {{num_players_joined}}</div>
+    </div>
+    <div class="col-sm-12">      
+      <div class="col-sm-6 well pull-left">
+        <h2>Games</h2>
+        {{#games}}
+          <div><span class="bold">Role:</span> {{role}} <span class="bold">Opponent:</span>{{oponent_identity}} 
+          <span class="bold">Status:</span>{{status}}
+          </div>
+        {{/games}}
+      </div>
+      <div class="col-sm-3 pull-right">
+        <div class="error"></div>
+        <div class="success"></div>
+
+        <input type="text" style="height:40px" id="value">
+        <button class="btn btn-info" id="play-button">Play</button>
+      </div>
+
+    </div>
+</script>

@@ -1,9 +1,9 @@
 player:
-  name: Joey
-  identity: joey@g.com
+  name: Nikhil3
+  identity: nikhil3@g.com
   password: password
   defence_set_length: 8
   host: http://127.0.0.1
   path: /games
-  port: 4000
+  port: 4003
 

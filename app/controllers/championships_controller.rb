@@ -13,7 +13,7 @@ class ChampionshipsController < ApplicationController
       response_body = JSON.parse(response.body)
       championship = Championship.create(identity: response_body["championship"]["id"], 
         title: response_body["championship"]["title"], status: response_body["championship"]["status"], num_players_joined: response_body["championship"]["number_of_players_joined"])
-      Player.create(championship_id: championship.id, auth_token: response_body["auth_token"])
+      Player.create(championship_id: championship.id, auth_token: response_body["auth_token"], status: Player::STATUS::PLAYING)
       render json: {success: true, championshipId: championship.identity}, status: :created      
     elsif response.status == 422
       render json: JSON.parse(response.body), status: :unprocessable_entity      
@@ -24,14 +24,23 @@ class ChampionshipsController < ApplicationController
   end
 
   def show
-    @championship = Championship.find_by_identity(params[:id])    
+    if request.format == :html    
+      respond_to do |format|
+        format.html
+        return
+      end
+    end
+    begin
+      championship = Championship.find_by_identity(params[:id])    
+    rescue ActiveRecord::RecordNotFound => e
+      render json: {message: "Does not exist"}, status: :not_found
+      return
+    end 
+    render json: championship.as_json(include: [:player, :games], methods: [:num_players_joined])    
   end
 
   def update
-    if @curent_player.nil?
-      render json:  {error: true}, status: :unauthorized      
-      return
-    end
+    
     championship = Championship.find_by_identity(params[:id])    
     championship.update_attributes(params.require(:championship).permit(:status, :num_players_joined))
     if championship.valid?
