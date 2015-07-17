@@ -8,6 +8,10 @@ class PlayerInfo
       send("#{name}=", value)
     end
   end
+
+  def payload
+    {player: {identity: self.identity, name: self.name, defence_length: self.defence_set_length, host: self.host , port: self.port , path: self.path}}        
+  end
   
 end
 

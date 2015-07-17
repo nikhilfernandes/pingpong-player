@@ -4,8 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def validate_player!            
-    auth_token = request.headers["HTTP_X_AUTHENTICATION_TOKEN"]
-    puts auth_token
+    auth_token = request.headers["HTTP_X_AUTHENTICATION_TOKEN"]    
     @current_player = auth_token && Player.where(auth_token: auth_token).first 
     unless @current_player
       render json: {errors: {message: "You are not authorized to perform this operation.", auth_token: auth_token }}, status: :unauthorized
