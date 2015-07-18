@@ -1,6 +1,7 @@
 class RoundsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  before_filter :validate_player!, except: [:play]
+  skip_before_filter :validate_player!, :only => [:play]
+  
   respond_to :json
 
 

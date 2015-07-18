@@ -18,7 +18,7 @@ PingPong.Views.Championship = Backbone.View.extend({
   play: function(e){
     
       $.ajax({
-      url: "/championships/"+this.model.get("id")+"/games/"+this.model.gameId()+"/rounds/"+this.model.roundId(),
+      url: "/championships/"+this.model.get("id")+"/games/"+this.model.gameId()+"/rounds/"+this.model.roundId()+"/play",
       type: "PUT",
       data: {value: $("#value").val()},
       success: function(data){
