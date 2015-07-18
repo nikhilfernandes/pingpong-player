@@ -17,7 +17,7 @@ class Round <  ActiveRecord::Base
     player_info = PlayerInfo.new(PLAYER_INFO["player"])
     params = {round: {last_played_by: player_info.identity}.merge!(play_params(value))}
     response = HttpRequest.put(Referee::HOST,Referee::PORT, "/championships/#{self.game.championship.identity}/games/#{game.game_identity}/rounds/#{round_identity}", params, player_auth)    
-    if response.status == 200      
+    if response.status == 200  ||   response.status == 204
       return {status: 200}
     elsif response.status == 422
       return {status: 422, body: JSON.parse(response.body)}

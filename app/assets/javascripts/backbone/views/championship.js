@@ -22,7 +22,7 @@ PingPong.Views.Championship = Backbone.View.extend({
       type: "PUT",
       data: {value: $("#value").val()},
       success: function(data){
-        
+        alert("Round played.")
       },
       error: function(data){
         res = $.parseJSON(data["responseText"]);
