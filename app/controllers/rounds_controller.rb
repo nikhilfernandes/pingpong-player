@@ -28,7 +28,7 @@ class RoundsController < ApplicationController
     if response[:status] == 200      
       render json: {success: true}, status: :ok      
     elsif response[:status] == 422
-      render json: JSON.parse(response[:body]), status: :unprocessable_entity      
+      render json: response[:body].to_json, status: :unprocessable_entity      
     else
       render json: {error: true}, status: :error      
     end
