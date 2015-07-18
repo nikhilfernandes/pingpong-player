@@ -29,7 +29,8 @@ class ChampionshipsController < ApplicationController
       render json: {message: "Does not exist"}, status: :not_found
       return
     end 
-    render json: championship.as_json(include: [:player, :games], methods: [:num_players_joined])    
+    render json: championship.as_json(:include => [{:games => { :include => :rounds}}, :player], :methods =>[:num_players_joined]), status: :ok
+    
   end
 
   def update
