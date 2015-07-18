@@ -1,6 +1,6 @@
 class RoundsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  before_filter :validate_player!
+  before_filter :validate_player!, except: [:play]
   respond_to :json
 
 
@@ -23,7 +23,7 @@ class RoundsController < ApplicationController
     championship = Championship.find(params[:championship_id])    
     game = championship.games.find(params[:game_id])
     round = game.rounds.find(params[:id])
-    response = round.play(params[:value], @current_player.auth_token)
+    response = round.play(params[:value], championship.player.auth_token)
     if response[:status] == 200      
       render json: {success: true}, status: :ok      
     elsif response[:status] == 422
