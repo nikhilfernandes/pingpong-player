@@ -3,11 +3,11 @@ class Round <  ActiveRecord::Base
   validates_presence_of :round_identity, :role, :order_of_play
   validates_numericality_of :order_of_play
 
-  def play(value)
+  def play_params(value)
     player_info = PlayerInfo.new(PLAYER_INFO["player"])
-    if self.role == ROLE::OFFENSE
+    if self.role == Game::ROLE::OFFENSE
       {offensive_number: value}
-    elsif self.role == ROLE::DEFENSE
+    elsif self.role == Game::ROLE::DEFENSE
       {defensive_array: value}
     end
     
@@ -15,14 +15,14 @@ class Round <  ActiveRecord::Base
 
   def play(value, player_auth)
     player_info = PlayerInfo.new(PLAYER_INFO["player"])
-    params = {round: {last_played_by: player_info.identity}.merge!(play(value))}
-    response = HttpRequest.post(Referee::HOST,Referee::PORT, "/championships/#{self.game.championship.identity}/games/#{game.identity}/rounds/#{round_identity}", params, player_auth)    
+    params = {round: {last_played_by: player_info.identity}.merge!(play_params(value))}
+    response = HttpRequest.put(Referee::HOST,Referee::PORT, "/championships/#{self.game.championship.identity}/games/#{game.game_identity}/rounds/#{round_identity}", params, player_auth)    
     if response.status == 200      
-      render json: {success: true}, status: :ok      
+      return {status: 200}
     elsif response.status == 422
-      render json: JSON.parse(response.body), status: :unprocessable_entity      
+      return {status: 422, body: JSON.parse(response.body)}
     else
-      render json: {error: true}, status: :error      
+      return {error: true}
     end
   end
 end

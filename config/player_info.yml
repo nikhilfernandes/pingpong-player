@@ -1,9 +1,9 @@
 player:
-  name: Nikhil3
-  identity: nikhil3@g.com
+  name: Nikhil2
+  identity: nikhil2@g.com
   password: password
-  defence_set_length: 8
+  defence_set_length: 7
   host: http://127.0.0.1
   path: /games
-  port: 4003
+  port: 4002
 

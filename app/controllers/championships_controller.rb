@@ -3,6 +3,7 @@ class ChampionshipsController < ApplicationController
   before_filter :validate_player!, only: [:update]
 
 
+
   def create        
     response = Player.join_championship(params[:championshipId])    
     if response[:status] == 201      
@@ -23,7 +24,7 @@ class ChampionshipsController < ApplicationController
       end
     end
     begin
-      championship = Championship.find_by_identity(params[:id])    
+      championship = Championship.find_by_identity(params[:id])      
     rescue ActiveRecord::RecordNotFound => e
       render json: {message: "Does not exist"}, status: :not_found
       return

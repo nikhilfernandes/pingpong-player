@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: pinpong_player_development
+  database: pinpong_player_development_3
   host: localhost
   pool: 5
 

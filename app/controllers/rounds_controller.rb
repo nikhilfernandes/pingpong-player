@@ -24,11 +24,10 @@ class RoundsController < ApplicationController
     game = championship.games.find(params[:game_id])
     round = game.rounds.find(params[:id])
     response = round.play(params[:value], @current_player.auth_token)
-    if response.status == 200
-      response_body = JSON.parse(response.body)      
+    if response[:status] == 200      
       render json: {success: true}, status: :ok      
-    elsif response.status == 422
-      render json: JSON.parse(response.body), status: :unprocessable_entity      
+    elsif response[:status] == 422
+      render json: JSON.parse(response[:body]), status: :unprocessable_entity      
     else
       render json: {error: true}, status: :error      
     end

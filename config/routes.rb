@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :championships do
     resources :games  do      
       resources :rounds do
-        get :play, :on => :member
+        put :play, :on => :member
       end
     end
   end
