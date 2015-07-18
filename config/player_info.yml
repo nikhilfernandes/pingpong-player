@@ -1,9 +1,9 @@
 player:
-  name: Chandler
-  identity: chandler@g.com
+  name: Colwin
+  identity: colwin@g.com
   password: password
   defence_set_length: 5
-  host: http://mpaani-pingpong-player7.herokuapp.com/
+  host: http://mpaani-pingpong-player8.herokuapp.com/
   path: /games
   port: 80
 
