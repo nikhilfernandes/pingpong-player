@@ -26,7 +26,11 @@ PingPong.Views.Championship = Backbone.View.extend({
       },
       error: function(data){
         res = $.parseJSON(data["responseText"]);
-        alert(res)
+        var errors = ""
+        _.each(res["errors"], function (error, field) {         
+          errors = errors + " " + _.str.humanize(field+ " "+error) 
+        });   
+        alert(errors);
       },
       dataType: "json"    
     });
