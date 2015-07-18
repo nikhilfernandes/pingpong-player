@@ -1,9 +1,9 @@
 player:
-  name: Nick
-  identity: nick@g.com
+  name: Joey
+  identity: joey@g.com
   password: password
   defence_set_length: 8
-  host: http://mpaani-pingpong-player2.herokuapp.com
+  host: http://mpaani-pingpong-player1.herokuapp.com
   path: /games
   port: 80
 
